@@ -17,8 +17,6 @@ function setup() {
         setActivity(e.target.value);
     }
     divWheel = setCanvas();
-
-    wheelTopic();
 }
 
 function draw() {
