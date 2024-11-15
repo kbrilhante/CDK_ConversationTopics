@@ -29,6 +29,7 @@ function draw() {
 }
 
 function setActivity(type) {
+    wheel = undefined;
     divWheel.hidden = true;
     switch (type) {
         case 'list':
@@ -251,7 +252,14 @@ function setCanvas() {
 }
 
 function mousePressed() {
-    if (wheel && wheel.text == 'Spin' && !wheel.spinning) {
-        wheel.spinWheel();
+    if (wheel) {
+        if (wheel.text == 'Spin' && !wheel.spinning) {
+            wheel.spinWheel();
+        }
+        if (wheel.picked) {
+            setTopic(getTopic(wheel.text));
+            divWheel.hidden = true;
+            wheel = undefined;
+        }
     }
 }

@@ -7,6 +7,7 @@ class Wheel {
         this.radius = width * 0.45;
         this.speed = 0;
         this.sections = [];
+        this.tompeti = new Tompeti();
         this.setSections(topics);
     }
     show() {
@@ -15,6 +16,7 @@ class Wheel {
             section.show();
         }
         this.triangle();
+        if (this.picked) this.tompeti.show();
         this.centerPanel();
     }
     triangle() {
@@ -69,7 +71,7 @@ class Wheel {
                 startAngle,
                 color(hue, sat, light)
             ));
-            hue += 100 / topics.length
+            hue += 100 / topics.length;
             startAngle += sliceSize;
             if (startAngle >= TWO_PI) startAngle -= TWO_PI;
         }
@@ -78,7 +80,6 @@ class Wheel {
     spinWheel() {
         this.spinning = true;
         this.speed = radians(30, 80);
-        console.log(this.speed);
     }
     _spin() {
         for (const section of this.sections) {
@@ -87,7 +88,7 @@ class Wheel {
                 this.text = section.title;
             }
         }
-        this.speed *= random(0.98, 1)
+        this.speed *= random(0.98, 1);
         if (this.speed < 0.0001) {
             this.speed = 0;
             this.spinning = false;
