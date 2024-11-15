@@ -2,6 +2,7 @@ let data;
 let divActivity;
 let divWheel;
 let topics;
+let wheel;
 
 function preload() {
     data = loadJSON("./ConversationTopics.json");
@@ -20,10 +21,13 @@ function setup() {
 
 function draw() {
     background(0);
+    if (wheel) {
+        wheel.show();
+    }
 }
 
 function setActivity(type) {
-    console.log(data.topics);
+    divWheel.hidden = true;
     switch (type) {
         case 'list':
             listTopics();
@@ -62,7 +66,7 @@ function listTopics() {
     }
 }
 
-function randomTopic() {
+function setCustomBar() {
     let row = document.createElement("div");
     row.className = "row my-1 mx-auto";
     divActivity.appendChild(row);
@@ -80,6 +84,11 @@ function randomTopic() {
         customList();
     };
     btnGroup.appendChild(btnList);
+    return btnGroup;
+}
+
+function randomTopic() {
+    let btnGroup = setCustomBar();
     let btnRandom = document.createElement("button");
     btnRandom.className = "btn btn-secondary";
     btnRandom.textContent = "Pick again";
@@ -92,6 +101,9 @@ function randomTopic() {
 }
 
 function wheelTopic() {
+    divActivity.innerHTML = "";
+    setCustomBar();
+    wheel = new Wheel(topics);
     divWheel.hidden = false;
 }
 
@@ -200,7 +212,6 @@ function checklistDone(group) {
     for (const element of group.children) {
         let checkbox = element.firstChild.firstChild;
         if (checkbox.checked) {
-            console.log(checkbox.value);
             topics.push(getTopic(checkbox.value));
         }
     }
@@ -229,8 +240,8 @@ function setCanvas() {
     col.className = "col-auto my-1 mx-auto";
     col.id = "divCanvas";
     row.appendChild(col);
-    let s = windowWidth > windowHeight ? windowHeight : windowWidth
-    s *= 0.7;
+    let s = windowHeight - document.querySelector('main').clientHeight;
+    if (s > windowWidth * 0.94) s = windowWidth * 0.94
     let canvas = createCanvas(s, s);
     canvas.parent("divCanvas");
     row.hidden = true;
