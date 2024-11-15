@@ -17,6 +17,8 @@ function setup() {
         setActivity(e.target.value);
     }
     divWheel = setCanvas();
+
+    wheelTopic();
 }
 
 function draw() {
@@ -246,4 +248,10 @@ function setCanvas() {
     canvas.parent("divCanvas");
     row.hidden = true;
     return row;
+}
+
+function mousePressed() {
+    if (wheel && wheel.text == 'Spin' && !wheel.spinning) {
+        wheel.spinWheel();
+    }
 }
