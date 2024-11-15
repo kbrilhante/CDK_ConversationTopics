@@ -10,13 +10,9 @@ class Tompeti {
     }
     create() {
         const explosions = 100;
-        const falling = 50;
 
         for (let i = 0; i < explosions; i++) {
-            this.confepizes.push(new Confepi());
-        }
-
-        for (let i = 0; i < falling; i++) {
+            this.confepizes.push(new Confepi(true));
             this.confepizes.push(new Confepi(false));
         }
     }

@@ -1,6 +1,5 @@
 class Wheel {
     constructor(topics) {
-        console.log(topics);
         this.text = "Spin";
         this.spinning = false;
         this.picked = false;
@@ -79,7 +78,7 @@ class Wheel {
     }
     spinWheel() {
         this.spinning = true;
-        this.speed = radians(30, 80);
+        this.speed = radians(40, 80);
     }
     _spin() {
         for (const section of this.sections) {
@@ -88,8 +87,8 @@ class Wheel {
                 this.text = section.title;
             }
         }
-        this.speed *= random(0.98, 1);
-        if (this.speed < 0.0001) {
+        this.speed *= random(0.975, 1);
+        if (this.speed < 0.0005) {
             this.speed = 0;
             this.spinning = false;
             this.picked = true;
