@@ -82,6 +82,8 @@ function setCustomBar() {
     btnList.textContent = "Change topics list";
     btnList.onclick = () => {
         divActivity.innerHTML = "";
+        divWheel.innerHTML = "";
+        wheel = "";
         customList();
     };
     btnGroup.appendChild(btnList);
@@ -104,6 +106,7 @@ function randomTopic() {
 function wheelTopic() {
     divActivity.innerHTML = "";
     setCustomBar();
+    divWheel = setCanvas();
     wheel = new Wheel(topics);
     divWheel.hidden = false;
 }
